@@ -1,0 +1,67 @@
+[
+
+	{
+		"title": "SuiteCRM Production",
+ 		"description": "SuiteCRM PHP7.1 container deploy",
+ 		"categories": ["basic"],
+		"logo": "https://raw.githubusercontent.com/salesagility/SuiteCRM/master/themes/SuiteP/images/sugar_icon.ico",
+		"image": "production",
+  		"ports": 
+			["80/tcp", 
+    		"443/tcp"],
+		"env": [ {
+			"name": "VIRTUAL_HOST", 
+			"label": "Container URL (test.example.com)"
+		       } ],
+		"volumes": [ { 
+			"container": "/var/www/html",
+			"bind": "/host/example/crm"
+		           } ],
+		"interactive": true,
+ 		"restart_policy": "unless-stopped",
+		"platform": "linux"
+	}
+
+	{
+		"title": "SuiteCRM Legacy",
+ 		"description": "SuiteCRM PHP5.5 container deploy",
+ 		"categories": ["basic"],
+		"logo": "https://raw.githubusercontent.com/salesagility/SuiteCRM/master/themes/SuiteP/images/sugar_icon.ico",
+		"image": "legacy",
+  		"ports": 
+			["80/tcp",
+			"443/tcp"],
+		"env": [ {
+			"name": "VIRTUAL_HOST", 
+			"label": "Container URL",
+			"set": "test.example.com"
+		       } ],
+		"volumes": [ { 
+			"container": "/var/www/html",
+			"bind": "/host/example/crm"
+		           } ],
+		"interactive": true,
+ 		"restart_policy": "unless-stopped",
+		"platform": "linux"
+	}
+
+	{
+		"title": "MariaDB",
+		"description": "MariaDB container deployment",
+		"categories": ["database"],
+		"platform": "linux",
+		"restart_policy": "unless-stopped",
+		"logo": "https://cloudinovasi.id/assets/img/logos/mariadb.png",
+		"image": "mariadb:latest",
+		"env": [{
+				"name": "MYSQL_ROOT_PASSWORD",
+				"label": "Root password"
+			   }],
+		"ports":
+			["3306/tcp"],
+		"volumes": [ {
+			"container": "/var/lib/mysql",
+			"bind": "/host/example/data"
+		           } ],
+	},
+]
